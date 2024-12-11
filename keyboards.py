@@ -21,5 +21,17 @@ catalog_keyboard = InlineKeyboardMarkup(
 buy_keyboard = InlineKeyboardMarkup(
     inline_keyboard=[
         [InlineKeyboardButton(text='Купить', url='https://mail.ru')],
+        [InlineKeyboardButton(text='Назад', callback_data='back_to_catalog')]
+    ]
+)
+
+admin_panel = InlineKeyboardMarkup(
+    inline_keyboard=[
+        [InlineKeyboardButton(text='Пользователи', callback_data='users')],
+        [InlineKeyboardButton(text='Статистика', callback_data='stat')],
+        [
+            InlineKeyboardButton(text='Блокировка', callback_data='block'),
+            InlineKeyboardButton(text='Разблокировка', callback_data='unblock')
+        ]
     ]
 )

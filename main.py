@@ -8,6 +8,8 @@ import asyncio
 
 from config import API_KEY
 from keyboards import *
+from admin import *
+from db import *
 import texts
 
 
@@ -18,11 +20,12 @@ dp = Dispatcher(bot, storage=MemoryStorage())
 
 @dp.message_handler(commands=['start'])
 async def start(message):
-    await message.answer(texts.start, reply_markup=start_keyboard)
+    await message.answer(f'Добро пожаловать, {message.from_user.full_name}! ' + texts.start, reply_markup=start_keyboard)
 
 @dp.message_handler(text='О нас')
 async def info(message):
-    await message.answer(texts.about, reply_markup=start_keyboard)
+    with open('files/2.jpg', 'rb') as f:
+        await message.answer_photo(f, caption=texts.about, reply_markup=start_keyboard)
 
 @dp.message_handler(text='Стоимость')
 async def price(message):
@@ -47,6 +50,12 @@ async def buy_xl(call):
 @dp.callback_query_handler(text='other')
 async def buy_other(call):
     await call.message.answer(texts.other)
+    await call.answer()
+
+
+@dp.callback_query_handler(text='back_to_catalog')
+async def back(call):
+    await call.message.answer('Что вас интересует?', reply_markup=catalog_keyboard)
     await call.answer()
 
 if __name__ == '__main__':
