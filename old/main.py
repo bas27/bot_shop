@@ -21,6 +21,7 @@ async def info(message):
     with open('../files/2.jpg', 'rb') as f:
         await message.answer_photo(f, caption=texts.about, reply_markup=start_keyboard)
 
+
 @dp.message_handler(text='Стоимость')
 async def price(message):
     await message.answer('Что вас интересует?', reply_markup=catalog_keyboard)
